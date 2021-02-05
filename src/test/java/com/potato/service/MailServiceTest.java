@@ -2,6 +2,7 @@ package com.potato.service;
 
 import com.potato.external.mail.MailCreator;
 import com.potato.external.mail.MailSender;
+import com.potato.service.dto.VerificationRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,9 +29,10 @@ public class MailServiceTest {
 	void 메일이_전송된다() {
 		// given
 		String receiver = "will.seungho@gmail.com";
-		
+		String code = "code";
+
 		// when
-		mailService.sendVerificationEmail(receiver);
+		mailService.sendVerificationEmail(VerificationRequest.testInstance(receiver, code));
 	}
 
 	private static class MockMailCreator implements MailCreator {

@@ -30,6 +30,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-aws-messaging'
+    implementation 'org.springframework.cloud:spring-cloud-aws-autoconfigure'
     implementation 'com.sun.mail:javax.mail:1.6.2'
 }
 

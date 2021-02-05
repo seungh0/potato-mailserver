@@ -1,8 +1,11 @@
 package com.potato.listener;
 
 import com.potato.service.MailService;
+import com.potato.service.dto.VerificationRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.aws.messaging.listener.SqsMessageDeletionPolicy;
 import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,9 +14,9 @@ public class SignUpListener {
 
 	private final MailService mailService;
 
-	@SqsListener("${cloud.aws.sqs.queue.url}")
-	public void receiveSignUpEvent(String receiver) {
-		mailService.sendVerificationEmail(receiver);
+	@SqsListener(value = "${cloud.aws.sqs.queue.url}", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
+	public void receiveSignUpEvent(@Payload VerificationRequest request) {
+		mailService.sendVerificationEmail(request);
 	}
 
 }
