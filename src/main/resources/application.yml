@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: dev
+    include:
+      - aws
+      - email
+server:
+  port: 9000
