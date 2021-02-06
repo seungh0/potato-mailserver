@@ -1,3 +1,13 @@
+# 감자서버 메시지 큐 서버
+
+## 기능
+- 회원가입시 이메일 검증 메일 발송
+
+## 기술
+- AWS SQS
+- Java Mail
+
+## 프로퍼티
 ### application-aws.yml
 
 ```yaml
