@@ -1,5 +1,6 @@
 package com.potato.config;
 
+import com.amazonaws.services.sqs.AmazonSQSAsync;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cloud.aws.messaging.config.QueueMessageHandlerFactory;
 import org.springframework.context.annotation.Bean;
@@ -13,11 +14,12 @@ import java.util.Collections;
 public class SqsConfig {
 
 	@Bean
-	public QueueMessageHandlerFactory queueMessageHandlerFactory(final ObjectMapper objectMapper) {
+	public QueueMessageHandlerFactory queueMessageHandlerFactory(final AmazonSQSAsync amazonSQSAsync, final ObjectMapper objectMapper) {
 		final QueueMessageHandlerFactory queueMessageHandlerFactory = new QueueMessageHandlerFactory();
 		queueMessageHandlerFactory.setArgumentResolvers(Collections.singletonList(
 				new PayloadMethodArgumentResolver(jackson2MessageConverter(objectMapper)))
 		);
+		queueMessageHandlerFactory.setAmazonSqs(amazonSQSAsync);
 		return queueMessageHandlerFactory;
 	}
 
